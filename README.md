@@ -1,7 +1,7 @@
-The run_analysis.R file presents the key steps to make the changes to the original data sets required by the assignment.
+Peer-graded Assignment: Getting and Cleaning Data Course Project This repository is a submission for Getting and Cleaning Data course project. It has the instructions on how to run analysis on Human Activity recognition dataset.
 
-It breaks down the program into different steps, which corresponds to the assignment steps. 
+Files CodeBook: A code book that describes the variables, the data, and any transformations or work that I performed to clean up the data
 
-The cleaned data is stored in the "Final_Dataset.txt", and stored in the "X_select" data frame in the program.
+run_analysis.R performs the data preparation and then followed by the 5 steps required as described in the course project’s definition: 1.Merges the training and the test sets to create one data set. 2.Extracts only the measurements on the mean and standard deviation for each measurement. 3.Uses descriptive activity names to name the activities in the data set 4.Appropriately labels the data set with descriptive variable names. 5.From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-The mean of the cleaned data is stored in the "Data_Mean.txt" and also stored in the "Data_Mean" data frame in the program.
+Final_Dataset.txt is the exported final data after going through all the sequences described above.

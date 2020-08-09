@@ -1,13 +1,32 @@
-This file will explain the details of the rationale behind the run_analysis.R file.
+The run_analysis.R script performs the data preparation and then followed by the 5 steps required as described in the course project’s definition.
 
-First of all, I read the data from the training and test X,y files using the "read.table" function, and use "rbind" function to combine the training and testing data. Besides the X,y files, I also use "read.table" to read in the "features.txt"" and "activity_labels.txt"" files.
+Download the dataset Dataset downloaded and extracted under the folder called UCI HAR Dataset
+2.Assign each data to variables
 
-Secondly, I created another "X_select" dataframe by choosing only those columns in "X" dataframe related the "mean" and "standard deviation". By observing that these columns all contain the pattern "mean()" or "std()", I use the "grep" function to filter columns with these two patterns only.
+features <- features.txt : 561 rows, 2 columns
 
-Thirdly, I change the "y" dataframe from numbers to the activity labels corresponding to each number from 1-6. This is done by using a for loop and change the value within "y" dataframe one by one.
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. activities <- activity_labels.txt : 6 rows, 2 columns
 
-Forthly, I change the names of the "X_select"" dataframe by combining "y" dataframe's activity label and the features corresponding to each columns. The features can be found in the "features" dataframe. So I use another for loop to change the names of the "X_select" dataframe one by one.
+List of activities performed when the corresponding measurements were taken and its codes (labels) subject_test <- test/subject_test.txt : 2947 rows, 1 column
 
-Fithly, I took the mean of each columns of "X_select" by using the "sapply" function and apply mean function to every columns of "X_select", the result is stored in the dataframe called "Data_Mean".
+contains test data of 9/30 volunteer test subjects being observed x_test <- test/X_test.txt : 2947 rows, 561 columns
 
-Lastly, I exported the cleaned dataframe -- "X_select" to a text file called "Final_Dataset.txt" and also exported the "Data_Mean" dataframe to a text file called "Data_Mean.txt".
+contains recorded features test data y_test <- test/y_test.txt : 2947 rows, 1 columns
+
+contains test data of activities’code labels subject_train <- test/subject_train.txt : 7352 rows, 1 column
+
+contains train data of 21/30 volunteer subjects being observed x_train <- test/X_train.txt : 7352 rows, 561 columns
+
+contains recorded features train data y_train <- test/y_train.txt : 7352 rows, 1 columns
+
+contains train data of activities’code labels
+
+Merges the training and the test sets to create one data set xdata (10299 rows, 561 columns) is created by merging x_train and x_test using rbind() function ydata (10299 rows, 1 column) is created by merging y_train and y_test using rbind() function subject (10299 rows, 1 column) is created by merging subject_train and subject_test using rbind() function merged_data (10299 rows, 563 column) is created by merging subject, ydata and xdata using cbind() function
+
+Extracts only the measurements on the mean and standard deviation for each measurement tidy_data (10299 rows, 88 columns) is created by subsetting merged_data, selecting only columns: subject, code and the measurements on the mean and standard deviation (std) for each measurement
+
+Uses descriptive activity names to name the activities in the data set Entire numbers in code column of the tidy_data replaced with corresponding activity taken from second column of the activities variable
+
+Appropriately labels the data set with descriptive variable names code column in tidy_data renamed into activities All Acc in column’s name replaced by Accelerometer All Gyro in column’s name replaced by Gyroscope All BodyBody in column’s name replaced by Body All Mag in column’s name replaced by Magnitude All start with character f in column’s name replaced by Frequency All start with character t in column’s name replaced by Time
+
+From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject TIDY_DATA_SET (180 rows, 88 columns) is created by sumarizing tidy_data taking the means of each variable for each activity and each subject, after groupped by subject and activity. Export TIDY_DATA_SET into TIDY_DATA_SET.txt file.
